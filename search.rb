@@ -1,7 +1,7 @@
 require 'json'
 
 products = Array.new
-product_items = File.open('products.txt', 'r').each_line.map { |l| 
+File.open('products.txt', 'r').each_line.map { |l| 
 	item = JSON.parse(l)
 
 	item["product_name_strings"] = item["product_name"].split(/[\s_]/)
@@ -10,8 +10,7 @@ product_items = File.open('products.txt', 'r').each_line.map { |l|
 	products.push(item)
 }
 
-
-listings_items = File.open('listings.txt', 'r').each_line.map { |l| 
+File.open('listings.txt', 'r').each_line.map { |l| 
 	item = JSON.parse(l)
 	products.each do |product|
 		if product["product_name_strings"].all? {|p| item["title"].match(/(^|\s)#{p}(\s|$)/)}
